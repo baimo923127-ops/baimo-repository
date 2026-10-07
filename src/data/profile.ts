@@ -89,8 +89,7 @@ export const skills = [
 /* ---------- 5. 教育经历（不需要就写 [] ） ---------- */
 export const education = [
   {
-    // 还没告诉我入学年份，先留空；填上后页面会显示这行时间
-    period: "",
+    period: "2025.09 — 2029.06",
     school: "北京工业大学",
     degree: "光电信息科学与工程 · 本科在读",
     detail: "",
