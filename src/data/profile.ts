@@ -18,7 +18,7 @@ export const profile = {
   /** 联系邮箱 */
   email: "baimo923127@gmail.com",
   /** 头像图片：把图片放进 public/images/ 目录，然后填 "/images/文件名.jpg" */
-  avatar: "/images/avatar.svg",
+  avatar: "/images/avatar.jpg",
   /**
    * 简历 PDF（可选）：把 PDF 放进 public/ 目录，这里填 "/resume.pdf"。
    * 不需要就保持空字符串 ""，按钮会自动隐藏。
@@ -89,10 +89,11 @@ export const skills = [
 /* ---------- 5. 教育经历（不需要就写 [] ） ---------- */
 export const education = [
   {
-    period: "2017.09 — 2021.06",
-    school: "学校名称",
-    degree: "专业 · 学历",
-    detail: "可以写 GPA、奖项、核心课程，或者留空。",
+    // 还没告诉我入学年份，先留空；填上后页面会显示这行时间
+    period: "",
+    school: "北京工业大学",
+    degree: "光电信息科学与工程 · 本科在读",
+    detail: "",
   },
 ];
 
