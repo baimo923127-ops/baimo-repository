@@ -101,3 +101,27 @@ Astro 官方支持 Markdown 内容集合，可以后续在 `src/content/` 下加
 
 **打印/导出 PDF 简历？**
 浏览器里直接 Ctrl+P，样式已经做过打印适配：导航、按钮、页脚会自动隐藏，只留正文内容。
+
+---
+
+## 6. 本项目的部署信息
+
+| 项 | 值 |
+| --- | --- |
+| 线上地址 | https://baimo-48b.pages.dev |
+| GitHub 仓库 | https://github.com/baimo923127-ops/baimo-repository |
+| Cloudflare Pages 项目名 | `baimo-48b` |
+| 构建命令 | `npm run build` |
+| 构建输出目录 | `dist` |
+| 生产分支 | `main` |
+
+**日常更新流程**（改完内容后执行）：
+
+```bash
+git add -A
+git commit -m "更新内容"
+git push
+```
+
+推送后 Cloudflare 会自动重新构建并发布，约 1 分钟生效。
+注意：推送需要能访问 GitHub（挂梯子），但访问自己的网站不需要。
