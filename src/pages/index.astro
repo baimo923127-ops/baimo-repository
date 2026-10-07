@@ -1,0 +1,171 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
+import Section from "../components/Section.astro";
+import {
+  profile,
+  experience,
+  projects,
+  skills,
+  education,
+  site,
+} from "../data/profile";
+
+const socials = profile.socials.filter((s) => s.url);
+
+const sections = [
+  experience.length > 0 && { id: "experience", label: "经历" },
+  projects.length > 0 && { id: "projects", label: "项目" },
+  skills.length > 0 && { id: "skills", label: "技能" },
+  education.length > 0 && { id: "education", label: "教育" },
+  profile.email && { id: "contact", label: "联系" },
+].filter(Boolean) as { id: string; label: string }[];
+---
+
+<BaseLayout
+  title={site.title}
+  description={site.description}
+  url={site.url || undefined}
+  name={profile.name}
+>
+  <Nav name={profile.name} sections={sections} />
+
+  <main>
+    <div class="wrap">
+      <Hero />
+
+      {
+        experience.length > 0 && (
+          <Section id="experience" title="工作经历">
+            <div class="timeline">
+              {experience.map((job) => (
+                <article class="timeline-item">
+                  <div class="item-head">
+                    <h3 class="item-role">{job.role}</h3>
+                    <span class="item-period">{job.period}</span>
+                  </div>
+                  <p class="item-sub">
+                    {[job.org, job.location].filter(Boolean).join(" · ")}
+                  </p>
+                  {job.summary && <p class="item-summary">{job.summary}</p>}
+                  {job.highlights.length > 0 && (
+                    <ul class="bullets">
+                      {job.highlights.map((h) => (
+                        <li>{h}</li>
+                      ))}
+                    </ul>
+                  )}
+                </article>
+              ))}
+            </div>
+          </Section>
+        )
+      }
+
+      {
+        projects.length > 0 && (
+          <Section id="projects" title="项目">
+            <div class="cards">
+              {projects.map((p) => (
+                <article class="card">
+                  <div class="item-head">
+                    <h3 class="item-role">{p.title}</h3>
+                    {p.period && <span class="item-period">{p.period}</span>}
+                  </div>
+                  {p.summary && <p class="item-summary">{p.summary}</p>}
+                  {p.highlights.length > 0 && (
+                    <ul class="bullets">
+                      {p.highlights.map((h) => (
+                        <li>{h}</li>
+                      ))}
+                    </ul>
+                  )}
+                  {p.tags.length > 0 && (
+                    <div class="tags">
+                      {p.tags.map((t) => (
+                        <span class="tag">{t}</span>
+                      ))}
+                    </div>
+                  )}
+                  {p.links.filter((l) => l.url).length > 0 && (
+                    <div class="card-links">
+                      {p.links
+                        .filter((l) => l.url)
+                        .map((l) => (
+                          <a href={l.url} target="_blank" rel="noreferrer">
+                            {l.label} ↗
+                          </a>
+                        ))}
+                    </div>
+                  )}
+                </article>
+              ))}
+            </div>
+          </Section>
+        )
+      }
+
+      {
+        skills.length > 0 && (
+          <Section id="skills" title="技能">
+            {skills.map((g) => (
+              <div class="skill-group">
+                <div class="skill-label">{g.group}</div>
+                <div class="tags">
+                  {g.items.map((i) => (
+                    <span class="tag tag-plain">{i}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </Section>
+        )
+      }
+
+      {
+        education.length > 0 && (
+          <Section id="education" title="教育经历">
+            <div class="timeline">
+              {education.map((e) => (
+                <article class="timeline-item">
+                  <div class="item-head">
+                    <h3 class="item-role">{e.school}</h3>
+                    <span class="item-period">{e.period}</span>
+                  </div>
+                  <p class="item-sub">{e.degree}</p>
+                  {e.detail && <p class="item-summary">{e.detail}</p>}
+                </article>
+              ))}
+            </div>
+          </Section>
+        )
+      }
+
+      {
+        profile.email && (
+          <Section id="contact" title="联系方式">
+            <div class="contact-box">
+              <p>想聊聊、合作，或者只是打个招呼，都欢迎直接发邮件给我。</p>
+              <div class="links">
+                <a class="btn btn-primary" href={`mailto:${profile.email}`}>
+                  {profile.email}
+                </a>
+                {socials.map((s) => (
+                  <a
+                    class="btn"
+                    href={s.url}
+                    target={s.url.startsWith("http") ? "_blank" : undefined}
+                    rel="noreferrer"
+                  >
+                    {s.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </Section>
+        )
+      }
+    </div>
+  </main>
+</BaseLayout>

@@ -1,0 +1,59 @@
+---
+import { profile } from "../data/profile";
+
+const socials = profile.socials.filter((s) => s.url);
+---
+
+<section class="hero" id="top">
+  <div class="hero-top">
+    {
+      profile.avatar && (
+        <img class="avatar" src={profile.avatar} alt={profile.name} width="92" height="92" />
+      )
+    }
+    <div>
+      <h1>{profile.name}</h1>
+      <p class="hero-tagline">{profile.tagline}</p>
+    </div>
+  </div>
+
+  {
+    profile.bio.length > 0 && (
+      <div class="hero-bio">
+        {profile.bio.map((p) => (
+          <p>{p}</p>
+        ))}
+      </div>
+    )
+  }
+
+  {(profile.location || profile.email) && (
+    <div class="hero-meta">
+      {profile.location && <span>{profile.location}</span>}
+      {profile.email && <span>{profile.email}</span>}
+    </div>
+  )}
+
+  <div class="links">
+    {profile.email && <a class="btn btn-primary" href={`mailto:${profile.email}`}>✉ 联系我</a>}
+    {
+      profile.resumeFile && (
+        <a class="btn" href={profile.resumeFile} download>
+          ↓ 下载简历
+        </a>
+      )
+    }
+    {
+      socials.map((s) => (
+        <a
+          class="btn"
+          href={s.url}
+          target={s.url.startsWith("http") ? "_blank" : undefined}
+          rel="noreferrer"
+        >
+          {s.label}
+        </a>
+      ))
+    }
+  </div>
+</section>
