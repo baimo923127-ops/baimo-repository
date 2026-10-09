@@ -1,0 +1,46 @@
+---
+import { profile } from "../data/profile";
+
+const githubLinks = profile.socials.filter((s) => s.url.startsWith("http"));
+---
+
+<section class="section contact-section" id="contact" aria-labelledby="contact-title">
+  <p class="eyebrow">SAY HELLO</p>
+  <h2 id="contact-title">一起聊聊。</h2>
+  <p>欢迎聊光电、交流学习，也欢迎分享正在动手做的东西。</p>
+
+  <p>
+    <a class="email-link" href={`mailto:${profile.email}`}>{profile.email}</a>
+  </p>
+
+  <div class="contact-actions">
+  <button class="btn btn-copy" id="copy-email" type="button">复制邮箱</button>
+
+  {
+    githubLinks.map((s) => (
+      <a class="text-link" href={s.url} target="_blank" rel="noreferrer">
+        {s.label}
+      </a>
+    ))
+  }
+  </div>
+
+  <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+</section>
+
+<script>
+  const copyButton = document.getElementById("copy-email");
+  const emailLink = document.querySelector(".email-link");
+  const copyStatus = document.getElementById("copy-status");
+
+  copyButton?.addEventListener("click", async () => {
+    const email = emailLink?.textContent?.trim() ?? "";
+
+    try {
+      await navigator.clipboard.writeText(email);
+      if (copyStatus) copyStatus.textContent = "已复制邮箱地址";
+    } catch {
+      if (copyStatus) copyStatus.textContent = "复制未成功，请选中上方邮箱地址手动复制。";
+    }
+  });
+</script>

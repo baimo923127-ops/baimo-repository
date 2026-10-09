@@ -1,59 +1,21 @@
 ---
-import { profile } from "../data/profile";
-
-const socials = profile.socials.filter((s) => s.url);
+import { profile, projects } from "../data/profile";
+const socials = profile.socials.filter((s) => s.url.startsWith("http"));
 ---
-
-<section class="hero" id="top">
-  <div class="hero-top">
-    {
-      profile.avatar && (
-        <img class="avatar" src={profile.avatar} alt={profile.name} width="92" height="92" />
-      )
-    }
-    <div>
-      <h1>{profile.name}</h1>
-      <p class="hero-tagline">{profile.tagline}</p>
-    </div>
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="hero-identity">
+    {profile.avatar && <img class="avatar" src={profile.avatar} alt={`${profile.name}的头像`} width="76" height="76" fetchpriority="high" />}
+    <div><p class="identity-name">你好，我是{profile.name}。</p><p class="identity-meta">光电本科生 <span aria-hidden="true">/</span> {profile.location}</p></div>
   </div>
-
-  {
-    profile.bio.length > 0 && (
-      <div class="hero-bio">
-        {profile.bio.map((p) => (
-          <p>{p}</p>
-        ))}
-      </div>
-    )
-  }
-
-  {(profile.location || profile.email) && (
-    <div class="hero-meta">
-      {profile.location && <span>{profile.location}</span>}
-      {profile.email && <span>{profile.email}</span>}
-    </div>
-  )}
-
-  <div class="links">
-    {profile.email && <a class="btn btn-primary" href={`mailto:${profile.email}`}>✉ 联系我</a>}
-    {
-      profile.resumeFile && (
-        <a class="btn" href={profile.resumeFile} download>
-          ↓ 下载简历
-        </a>
-      )
-    }
-    {
-      socials.map((s) => (
-        <a
-          class="btn"
-          href={s.url}
-          target={s.url.startsWith("http") ? "_blank" : undefined}
-          rel="noreferrer"
-        >
-          {s.label}
-        </a>
-      ))
-    }
+  <p class="eyebrow hero-eyebrow">LEARNING BY MAKING</p>
+  <h1 id="hero-title">{profile.tagline.split("，")[0]}，<br /><span>{profile.tagline.split("，").slice(1).join("，")}</span></h1>
+  <p class="hero-intro">{profile.intro}</p>
+  <div class="links hero-links">
+    {projects.length > 0 && <a class="btn btn-primary" href="#projects">看看我在做什么 <span aria-hidden="true">↗</span></a>}
+    {socials.map((s) => <a class="text-link" href={s.url} target="_blank" rel="noreferrer">{s.label} <span aria-hidden="true">↗</span></a>)}
+    {profile.email && <a class="text-link" href="#contact">联系我 <span aria-hidden="true">↗</span></a>}
+    {profile.resumeFile && <a class="text-link" href={profile.resumeFile} download>下载简历 ↓</a>}
   </div>
+  <div class="hero-note"><span class="status-dot" aria-hidden="true"></span> 正在探索 <span class="note-divider" aria-hidden="true">/</span> 光电芯片与单光子探测</div>
+  <div class="hero-orbit" aria-hidden="true"><span></span><span></span><span></span><i></i></div>
 </section>

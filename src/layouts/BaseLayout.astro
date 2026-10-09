@@ -25,7 +25,11 @@ const year = new Date().getFullYear();
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     {url && <meta property="og:url" content={url} />}
-    <meta name="twitter:card" content="summary" />
+    {url && <meta property="og:image" content={`${url}/images/social-card.png`} />}
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="白墨 · 学一点光电，做一点东西。" />
+    <meta name="twitter:card" content="summary_large_image" />
     <script is:inline>
       (function () {
         try {
@@ -38,11 +42,12 @@ const year = new Date().getFullYear();
     </script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">跳到正文</a>
     <slot />
     <footer class="footer">
       <div class="wrap footer-inner">
         <span>© {year} {name}</span>
-        <span>由 Astro 构建 · 托管于 Cloudflare Pages</span>
+        <span>保持好奇，慢慢积累。</span>
       </div>
     </footer>
   </body>
