@@ -93,6 +93,14 @@ a, button, summary { -webkit-tap-highlight-color: transparent; }
 .project-content h3 { font-size: 26px; font-weight: 600; line-height: 1.5; letter-spacing: -.02em; margin-top: 24px; }
 .project-subtitle { font-size: 13px; margin-top: 10px; line-height: 1.75; font-weight: 550; }
 .project-summary { color: var(--muted); font-size: 13px; line-height: 1.95; margin-top: 14px; }
+.project-links { margin-top: 16px; }
+.project-toolkit { min-width: 0; padding: 30px 24px; background: var(--accent-soft); border-left: 1px solid var(--line); }
+.project-toolkit ul { list-style: none; padding: 0; margin: 20px 0 0; }
+.project-toolkit li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 12px; padding: 15px 0; border-top: 1px solid var(--line); }
+.toolkit-number { color: var(--accent); font: 11px/24px ui-monospace, Consolas, monospace; }
+.project-toolkit h4 { font-size: 14px; font-weight: 600; }
+.project-toolkit li p { margin-top: 4px; font-size: 12px; color: var(--muted); }
+.project-toolkit code { display: block; margin-top: 7px; color: var(--accent); font: 10px/1.8 ui-monospace, Consolas, monospace; overflow-wrap: anywhere; }
 .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 22px; }
 .tag { padding: 2px 8px; font-size: 10px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); }
 .project-visual { display: flex; flex-direction: column; justify-content: center; background: #edf3ef; min-width: 0; border-left: 1px solid var(--line); }
@@ -137,6 +145,7 @@ a, button, summary { -webkit-tap-highlight-color: transparent; }
   .hero-intro { max-width: 480px; }
   .project-card { grid-template-columns: 1fr; }
   .project-visual { border-left: 0; border-top: 1px solid var(--line); }
+  .project-toolkit { border-left: 0; border-top: 1px solid var(--line); padding: 24px 22px; }
   .project-visual img { max-height: 300px; object-fit: contain; }
   .about-grid { gap: 32px; }
 }
